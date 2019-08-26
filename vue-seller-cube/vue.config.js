@@ -1,3 +1,11 @@
+
+const express = require('express');
+const app = express();
+const data = require("./data.json");
+const seller = data.seller;
+const goods = data.goods;
+const ratings = data.ratings;
+console.log(data);
 module.exports = {
 
   css: {
@@ -18,6 +26,26 @@ module.exports = {
   },
   // 它支持webPack-dev-server的所有选项
   devServer: {
+    before(app) {
+      app.get('/api/seller', (req, res) => {
+           res.json({              
+               errno: 0,   // 这里是你的json内容
+               data: seller
+           })
+       });
+       app.get('/api/goods', (req, res) => {
+           res.json({              
+               errno: 0,   // 这里是你的json内容
+               data: goods
+           })
+       });
+       app.get('/api/ratings', (req, res) => {
+        res.json({              
+            errno: 0,   // 这里是你的json内容
+            data: ratings
+        })
+    });
+    },
     host: "192.168.1.6",
     port: 8888, // 端口号
     https: false, // https:{type:Boolean}
