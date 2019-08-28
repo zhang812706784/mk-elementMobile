@@ -1,13 +1,14 @@
 
-const express = require('express');
-const app = express();
+const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 const data = require("./data.json");
 const seller = data.seller;
 const goods = data.goods;
 const ratings = data.ratings;
 console.log(data);
 module.exports = {
-
   css: {
     loaderOptions: {
       stylus: {
@@ -50,6 +51,12 @@ module.exports = {
     port: 8888, // 端口号
     https: false, // https:{type:Boolean}
     open: true//配置自动启动浏览器
-  }
+  },
+  // 起别名
+  chainWebpack: config => {
+    config.resolve.alias
+     .set('@', resolve('src'))
+     .set('assets', resolve('src/assets'))
+   }
  
 }
