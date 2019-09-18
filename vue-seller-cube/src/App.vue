@@ -2,7 +2,7 @@
   <div id="app">
     <!-- header -->
     <cHeader></cHeader>
-    <div class="tab">
+    <div class="tab border-1px">
       <router-link to="/goods" class="tab-item">商品</router-link>
       <router-link to="/seller" class="tab-item">评价</router-link>
       <router-link to="/ratings" class="tab-item">商家</router-link>
@@ -28,16 +28,17 @@ export default {
 }
 </script>
 <style lang="less">
-@import "./common/css/reset.css";
+@import "./common/less/mixin.less";
 #app{
   .tab{
     display: flex;
-    height: 40px;
-    line-height: 40px;
+    height: 80px;
+    line-height: 80px;
+    .border-1px(rgba(7,17,27,0.1));
     .tab-item{
       flex:1;
       text-align: center;
-      font-size: 14px;
+      font-size: 28px;
     }
     .link-active{
       color: rgb(240,20,20);

@@ -8,3 +8,6 @@ export default {
     name:"cHeader"
 }
 </script>
+<style lang="less" scoped>
+    
+</style>
