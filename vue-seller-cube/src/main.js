@@ -6,7 +6,9 @@ import App from './App.vue'
 import "./common/css/reset.css";
 import "./common/less/index.less";
 
+
 Vue.config.productionTip = false
+
 
 new Vue({
   router,

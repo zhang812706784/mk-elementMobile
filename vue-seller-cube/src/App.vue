@@ -30,6 +30,9 @@ export default {
 <style lang="less">
 @import "./common/less/mixin.less";
 #app{
+  .link-active{
+      color: rgb(240,20,20);
+    }
   .tab{
     display: flex;
     height: 80px;
@@ -40,9 +43,7 @@ export default {
       text-align: center;
       font-size: 28px;
     }
-    .link-active{
-      color: rgb(240,20,20);
-    }
+    
   }
 }
 </style>

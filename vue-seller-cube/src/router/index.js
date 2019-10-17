@@ -11,6 +11,9 @@ const routes = [{
 },{ 
     path: '/ratings', 
     component: () => import("@/components/ratings/ratings")  
+},{ 
+    path: '/preview', 
+    component: () => import("@/components/HelloWorld.vue")  
 }];
 export const router = new VueRouter({
     linkActiveClass: 'link-active',
