@@ -27,6 +27,7 @@ module.exports = {
   // 它支持webPack-dev-server的所有选项
   devServer: {
     before(app) {
+     console.log(222)
       app.get('/api/seller', (req, res) => {
            res.json({              
                errno: 0,   // 这里是你的json内容

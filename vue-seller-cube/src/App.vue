@@ -15,6 +15,7 @@
 
 <script>
 import cHeader from "@/components/header/c-header"
+import {seller} from "@/api/app"
 export default {
   name: 'app',
   components:{
@@ -24,6 +25,13 @@ export default {
     this.$router.push({
       path:'/goods'
     });
+    this.sellerFun();
+  },
+  methods:{
+    async sellerFun(){
+      let res = await seller();
+      console.log(res);
+    }
   }
 }
 </script>
