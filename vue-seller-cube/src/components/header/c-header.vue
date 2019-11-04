@@ -1,7 +1,6 @@
 <template>
     <div class="header">
-        I am a header
-        <image src=""/>
+        <img :src="sellerObj.avatar"/>
         <div class="right-header-wrap">
             22
         </div>
@@ -9,21 +8,27 @@
 </template>
 <script>
 export default {
-    name:"cHeader"
+    name:"cHeader",
+    props:['sellerObj']
 }
 </script>
 <style lang="less" scoped>
     .header{
-        height: 212px;
         font-size: 0px;
         padding-top: 48px;
-        image{
+        padding-left: 48px;
+        background: yellow;
+        img{
             width: 128px;
             height: 128px;
+            margin-bottom: 36px;
+            vertical-align: top;
+            margin-right: 32px;
         }
         .right-header-wrap{
             display: inline-block;
             font-size: 20px;
+            vertical-align: top;
         }
     }
 </style>

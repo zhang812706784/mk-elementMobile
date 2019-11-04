@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- header -->
-    <cHeader></cHeader>
+    <cHeader :sellerObj='sellerObj'></cHeader>
     <div class="tab border-1px">
       <router-link to="/goods" class="tab-item">商品</router-link>
       <router-link to="/seller" class="tab-item">评价</router-link>
@@ -21,6 +21,11 @@ export default {
   components:{
     cHeader
   },
+  data(){
+    return {
+      sellerObj: {}
+    }
+  },
   mounted(){
     this.$router.push({
       path:'/goods'
@@ -30,7 +35,7 @@ export default {
   methods:{
     async sellerFun(){
       let res = await seller();
-      console.log(res);
+      this.sellerObj  = res.data;
     }
   }
 }

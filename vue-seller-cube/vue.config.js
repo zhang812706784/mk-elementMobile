@@ -6,7 +6,6 @@ const data = require("./data.json");
 const seller = data.seller;
 const goods = data.goods;
 const ratings = data.ratings;
-console.log(data);
 module.exports = {
   css: {
     loaderOptions: {
@@ -27,7 +26,6 @@ module.exports = {
   // 它支持webPack-dev-server的所有选项
   devServer: {
     before(app) {
-     console.log(222)
       app.get('/api/seller', (req, res) => {
            res.json({              
                errno: 0,   // 这里是你的json内容
@@ -45,9 +43,9 @@ module.exports = {
             errno: 0,   // 这里是你的json内容
             data: ratings
         })
-    });
+      });
     },
-    host: "127.0.0.1",
+    host: "10.136.197.69",
     port: 8888, // 端口号
     https: false, // https:{type:Boolean}
     open: true//配置自动启动浏览器
