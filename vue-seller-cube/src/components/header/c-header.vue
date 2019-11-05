@@ -38,11 +38,19 @@ export default {
             font-size: 20px;
             vertical-align: top;
             .right-content-item{
-
+                .brand-icon{
+                    .background('~@/assets/image/header/brand');
+                    width: 60px;
+                    height: 36px;
+                    display: inline-block;
+                    background-size: 100% 100%;
+                    background-repeat: no-repeat;
+                }
+                span{
+                    display: inline-block;
+                }
             }
-            .brand-icon{
-                .background('../../assets/image/brand');
-            }
+            
             
         }
     }

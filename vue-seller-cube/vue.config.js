@@ -45,16 +45,15 @@ module.exports = {
         })
       });
     },
-    host: "192.168.43.66",
-    port: 8889, // 端口号
+    host: "192.168.1.6",
+    port: 8888, // 端口号
     https: false, // https:{type:Boolean}
-    open: true//配置自动启动浏览器
+    open: false//配置自动启动浏览器
   },
   // 起别名
   chainWebpack: config => {
     config.resolve.alias
      .set('@', resolve('src'))
-     .set('assets', resolve('src/assets'))
    }
  
 }
