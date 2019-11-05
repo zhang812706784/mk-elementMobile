@@ -11,3 +11,11 @@
 
     }
 }
+// 根据不同的像素比现实不同的图片
+.background(@name){
+    background-image: url('@{name}/@2x');
+    @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
+        background-image: url('@{name}/@3x');
+    };
+}
+

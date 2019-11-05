@@ -45,8 +45,8 @@ module.exports = {
         })
       });
     },
-    host: "10.136.197.69",
-    port: 8888, // 端口号
+    host: "192.168.43.66",
+    port: 8889, // 端口号
     https: false, // https:{type:Boolean}
     open: true//配置自动启动浏览器
   },

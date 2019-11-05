@@ -2,7 +2,14 @@
     <div class="header">
         <img :src="sellerObj.avatar"/>
         <div class="right-header-wrap">
-            22
+            <div class="right-content-item">
+                <i class="brand-icon"></i>
+                <span>
+                    粥品香坊（大运村）
+                </span>
+            </div>
+            <div class="right-content-item"></div>
+            <div class="right-content-item"></div>
         </div>
     </div>
 </template>
@@ -12,7 +19,8 @@ export default {
     props:['sellerObj']
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" scope>
+    @import "../../common/less/mixin.less";
     .header{
         font-size: 0px;
         padding-top: 48px;
@@ -29,6 +37,13 @@ export default {
             display: inline-block;
             font-size: 20px;
             vertical-align: top;
+            .right-content-item{
+
+            }
+            .brand-icon{
+                .background('../../assets/image/brand');
+            }
+            
         }
     }
 </style>
