@@ -19,6 +19,9 @@
 
     }
 }
+html,body{
+    height: 100%;
+}
 .fontSize16{
     font-size: 16px;
 }
@@ -27,4 +30,31 @@
 }
 .fontSize14{
     font-size: 14px;
+}
+span,i{
+    display:inline-block;
+}
+.overFlow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+.breakRow{
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.blurFilter{
+    filter: blur(10px);
+}
+.clearFix{
+    &::after{
+        content: '';
+        display: block;
+        visibility: hidden;
+        height: 0;
+        clear: both;
+    }
 }

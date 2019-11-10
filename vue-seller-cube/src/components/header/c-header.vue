@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <img :src="sellerObj.avatar"/>
+        <img :src="sellerObj.avatar" class="headerImg"/>
         <div class="right-header-wrap">
             <div class="right-content-item row-one">
                 <i class="brand-icon"></i>
@@ -20,18 +20,38 @@
                 </span>
             </div>
         </div>
-        <div class="header-tip">
+        <div class="header-tip" @click="showDetailFun">
             <span class="fontSize12">{{5}}个</span><i class="icon-keyboard_arrow_right fontSize12"></i>
         </div>
+        <img class="bgImage blurFilter" :src="sellerObj.avatar" alt="">
+        <div class="header-bottom" @click="showDetailFun">
+            <i class="heander-bottom-icon"></i>
+            <span class="fontSize12 overFlow">{{sellerObj.bulletin}}</span>
+            <i class="icon-keyboard_arrow_right fontSize12"></i>
+        </div>
+        <detail v-if="detailFlag" @closeDetail = "closeDetail"></detail>
     </div>
 </template>
 <script>
+import detail from '@/components/header/detail';
 export default {
     name:"cHeader",
     props:['sellerObj'],
     data(){
         return{
-            iconArr:['decrease_1','discount_1','guarantee_1','invoice_1','special_1']
+            iconArr:['decrease_1','discount_1','guarantee_1','invoice_1','special_1'],
+            detailFlag: false
+        }
+    },
+    components:{
+        detail
+    },
+    methods:{
+        showDetailFun(){
+            this.detailFlag = true;
+        },
+        closeDetail(){
+            this.detailFlag = false;
         }
     }
 }
@@ -40,32 +60,38 @@ export default {
     @import "../../common/less/mixin.less";
     .header{
         font-size: 0px;
-        background: pink;
+        background: rgba(7, 17, 27 , 0.5);
         padding-top: 48px;
         position: relative;
+        overflow: hidden;
+        span,i{
+            color: #ffff; 
+        }
+        .bgImage{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+        }
         &>.header-tip{
             position:absolute;
             right: 24px;
-            bottom: 50px;
+            bottom: 79px;
             border-radius: 40px;
             background: rgba(0, 0, 0, 0.2);
             padding: 10px 15px;
-            span,i{
-                display:inline-block;
-                color: #ffff; 
-                vertical-align: middle;
-            }
             span{
                 margin-right: 4px;
             }
         }
-        &>img{
+        &>.headerImg{
             width: 128px;
             height: 128px;
             margin-bottom: 36px;
             vertical-align: top;
             margin-right: 32px;
-            
             margin-left: 48px;
         }
         .right-header-wrap{
@@ -130,8 +156,29 @@ export default {
                 margin-right: 8px;
                 vertical-align: top;
             }
+        }
+        .header-bottom{
+            height: 56px;
+            font-weight: 200;
+            line-height: 56px;
+            color: #ffff;
+            background: rgba(7, 17, 27 , 0.2);
+            padding: 0 24px; 
             
-            
+            .heander-bottom-icon{
+                .background('~@/assets/image/header/bulletin');
+                width: 66px;
+                height: 36px;
+                margin-right: 8px;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+            span{
+                width: calc(100% - 100px);
+            }
+            span,i{
+                vertical-align: middle;
+            }
         }
     }
 </style>
