@@ -29,7 +29,7 @@
             <span class="fontSize12 overFlow">{{sellerObj.bulletin}}</span>
             <i class="icon-keyboard_arrow_right fontSize12"></i>
         </div>
-        <detail v-if="detailFlag" @closeDetail = "closeDetail"></detail>
+        <detail v-if="detailFlag" :sellerObj="sellerObj" @closeDetail = "closeDetail"></detail>
     </div>
 </template>
 <script>

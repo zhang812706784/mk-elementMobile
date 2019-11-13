@@ -2,10 +2,9 @@
     <div class="header-detail fontSize12">
         <div class="detail-wrap clearFix">
             <div class="detail-main breakRow">
-                <span>
-                    555566666666666666666666d4544444444444444444444444444444444444444455556666666666665ggggggggggggggggggggggg444444444444444444444444444444
-                    555566666666666666666666d45444444444444444444444444444444444444444
-                </span>
+                <h1 class="fontSize16">
+                    {{sellerObj.name}}
+                </h1>
             </div>
         </div>
         <div class="header-detail-footer">
@@ -15,6 +14,7 @@
 </template>
 <script>
 export default {
+    props:['sellerObj'],
     data(){
         return{}
     },
@@ -39,7 +39,14 @@ export default {
     .detail-wrap{
         min-height: 100vh;
         .detail-main{
+            padding-top: 128px; 
             padding-bottom: 128px; 
+            h1{
+                font-weight: 700;
+                color: #fff;
+                text-align: center;
+                margin-bottom: 32px;
+            }
         }
     }
     .header-detail-footer{
