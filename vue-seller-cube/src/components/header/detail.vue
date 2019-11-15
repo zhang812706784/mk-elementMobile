@@ -1,10 +1,13 @@
 <template>
     <div class="header-detail fontSize12">
         <div class="detail-wrap clearFix">
-            <div class="detail-main breakRow">
+            <div class="detail-main">
                 <h1 class="fontSize16">
                     {{sellerObj.name}}
                 </h1>
+                <div>
+                    <star :score = "sellerObj.score" :size="36"></star>
+                </div>
             </div>
         </div>
         <div class="header-detail-footer">
@@ -13,10 +16,14 @@
     </div>
 </template>
 <script>
+import star from '@/common-components/star';
 export default {
     props:['sellerObj'],
     data(){
         return{}
+    },
+    components:{
+        star
     },
     methods:{
         closeDetail() {
