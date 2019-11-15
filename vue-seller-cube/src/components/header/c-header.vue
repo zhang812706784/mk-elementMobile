@@ -14,7 +14,7 @@
                 </span>
             </div>
             <div class="right-content-item row-three" v-if="sellerObj.supports">
-                <i class="row-three-icon" :class= [iconArr[sellerObj.supports[0].type]]></i>
+                <i class="dicount-icon" :class= [iconArr[sellerObj.supports[0].type]]></i>
                 <span class="fontSize12 common-title title-two">
                     {{sellerObj.supports[0].description}}
                 </span>
@@ -29,7 +29,7 @@
             <span class="fontSize12 overFlow">{{sellerObj.bulletin}}</span>
             <i class="icon-keyboard_arrow_right fontSize12"></i>
         </div>
-        <detail v-if="detailFlag" :sellerObj="sellerObj" @closeDetail = "closeDetail"></detail>
+        <detail v-if="detailFlag" :iconArr="iconArr" :sellerObj="sellerObj" @closeDetail = "closeDetail"></detail>
     </div>
 </template>
 <script>
@@ -119,7 +119,6 @@ export default {
                 .title-two{
                     
                 }
-
                 span{
                     display: inline-block;
                     vertical-align: top;
@@ -130,31 +129,6 @@ export default {
             }
             .row-two{
                 margin-bottom: 20px;
-            }
-            .row-three{
-                .decrease_1{
-                    .background('~@/assets/image/header/decrease_1');
-                }
-                .discount_1{
-                    .background('~@/assets/image/header/discount_1');
-                }
-                .guarantee_1{
-                    .background('~@/assets/image/header/guarantee_1');
-                }
-                .invoice_1{
-                    .background('~@/assets/image/header/invoice_1');
-                }
-                .special_1{
-                    .background('~@/assets/image/header/special_1');
-                }
-            }
-            .row-three-icon{
-                width: 24px;
-                height: 24px;
-                background-size: 100% 100%;
-                display: inline-block; 
-                margin-right: 8px;
-                vertical-align: top;
             }
         }
         .header-bottom{

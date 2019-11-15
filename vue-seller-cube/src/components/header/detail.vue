@@ -8,6 +8,22 @@
                 <div>
                     <star :score = "sellerObj.score" :size="36"></star>
                 </div>
+                <div class="title-part-con">
+                    <titlePart :titleInfo = '"优惠信息"'></titlePart>
+                </div>
+                <div class="discount-content common-part" v-if="sellerObj.supports.length">
+                   <div class='discount-item' 
+                        v-for="(item,index) in sellerObj.supports" :key="index">
+                       <i class="dicount-icon-32 discount-i" :class="iconArr[item.type]"></i>
+                       <span class="fontSize12 discount-span">{{item.description}}</span>
+                   </div>
+                </div>
+                <div class="title-part-con">
+                    <titlePart :titleInfo = '"商家公告"'></titlePart>
+                </div>
+                <p class="advice-wrap fontSize12 common-part">
+                    {{sellerObj.bulletin}}
+                </p>
             </div>
         </div>
         <div class="header-detail-footer">
@@ -17,13 +33,15 @@
 </template>
 <script>
 import star from '@/common-components/star';
+import titlePart from '@/common-components/title-part';
 export default {
-    props:['sellerObj'],
+    props:['sellerObj','iconArr'],
     data(){
         return{}
     },
     components:{
-        star
+        star,
+        titlePart
     },
     methods:{
         closeDetail() {
@@ -32,7 +50,7 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .header-detail{
     position: fixed;
     top: 0;
@@ -46,13 +64,36 @@ export default {
     .detail-wrap{
         min-height: 100vh;
         .detail-main{
-            padding-top: 128px; 
-            padding-bottom: 128px; 
+            padding: 128px 72px;
             h1{
                 font-weight: 700;
                 color: #fff;
                 text-align: center;
                 margin-bottom: 32px;
+            }
+            .title-part-con{
+                margin-top: 56px;
+                padding-left: 24px;
+            }
+            .common-part{
+                margin-top: 48px;
+                padding: 0 48px;
+            }
+            .discount-content{
+               
+                .discount-item{
+                    margin-bottom: 24px;
+                    .discount-i{
+                        vertical-align: middle;
+                    }
+                    .discount-span{
+                        vertical-align: middle;
+                        margin-left: 12px;
+                    }
+                }
+            }
+            .advice-wrap{
+                line-height: 48px;
             }
         }
     }
