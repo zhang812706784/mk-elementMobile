@@ -29,7 +29,9 @@
             <span class="fontSize12 overFlow">{{sellerObj.bulletin}}</span>
             <i class="icon-keyboard_arrow_right fontSize12"></i>
         </div>
-        <detail v-if="detailFlag" :iconArr="iconArr" :sellerObj="sellerObj" @closeDetail = "closeDetail"></detail>
+        <transition name="fade">
+            <detail v-if="detailFlag" :iconArr="iconArr" :sellerObj="sellerObj" @closeDetail = "closeDetail"></detail>
+        </transition>
     </div>
 </template>
 <script>
@@ -153,6 +155,12 @@ export default {
             span,i{
                 vertical-align: middle;
             }
+        }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 2s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
+            opacity: 0;
         }
     }
 </style>
