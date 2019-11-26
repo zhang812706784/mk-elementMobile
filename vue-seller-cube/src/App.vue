@@ -7,9 +7,7 @@
       <router-link to="/seller" class="tab-item">评价</router-link>
       <router-link to="/ratings" class="tab-item">商家</router-link>
     </div>
-    <div class="content">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -43,6 +41,7 @@ export default {
 <style lang="less">
 @import "./common/less/mixin.less";
 #app{
+  height: 100vh;
   .link-active{
       color: rgb(240,20,20);
     }

@@ -5,8 +5,9 @@ import App from './App.vue'
 
 import "./common/css/reset.css";
 import "./common/less/index.less";
+import BScroll from 'better-scroll'
 
-
+Vue.prototype.bScroll = BScroll
 Vue.config.productionTip = false
 
 

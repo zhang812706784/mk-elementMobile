@@ -1,15 +1,18 @@
 <template>
     <div class="goods">
-        <ul class="menu-list">
-            <li class="menu-item fontSize12" 
-                v-for="(item,index) in goodsList" :key="index">
-               
-                <span class="middle border-1px"><i class="menu-icon" v-if="item.type > -1" :class="[iconTyps[item.type]]"></i>{{item.name}}</span>
-            </li>
-        </ul>
-        <div class="goods-wrap">
+        <div class="menu-list-wrap" ref="b1">
+            <ul class="menu-list">
+                <li class="menu-item fontSize12"  :class="{'activeIndex': activeIndex == index}"
+                    v-for="(item,index) in goodsList" :key="index">
+                
+                    <span class="middle border-1px"><i class="menu-icon" v-if="item.type > -1" :class="[iconTyps[item.type]]"></i>{{item.name}}</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="goods-wrap" ref="b2">
             <ul>
-                <li v-for="(content,index) in goodsList" :key="index">
+                <li v-for="(content,index) in goodsList" :key="index" class="li-hook">
                     <h2 class="food-title fontSize14">{{content.name}}</h2>
                     <!-- 食物内容 -->
                     <ul class="food-wrap">
@@ -29,10 +32,10 @@
                                     <span>好评率{{food.rating}}%</span>
                                 </p>
 
-                                <p class="common-des margin16" v-if="food.price">
-                                    <span class="real-price fontSize14">￥{{food.price}}</span>
-                                    <span class="fontSize12" style="text-decoration: line-through;">
-                                        {{food.oldPrice}}
+                                <p class="common-des margin16">
+                                    <span class="real-price fontSize14" v-if="food.price">￥{{food.price}}</span>
+                                    <span class="fontSize12" style="text-decoration: line-through;"  v-if="food.oldPrice">
+                                        ￥{{food.oldPrice}}
                                     </span>
                                 </p>
                             </div>
@@ -40,8 +43,6 @@
                     </ul>
                 </li>
             </ul>
-            
-            
         </div>
     </div>
 </template>
@@ -51,6 +52,10 @@ export default {
     data(){
         return{
             goodsList:[],
+            goodHeights:[],
+            activeIndex: 0,
+            mSroll: null,
+            lSroll: null,
             iconTyps: ['decrease_3','guarantee_3','guarantee_3','invoice_3','special_3']
         }
     },
@@ -59,9 +64,57 @@ export default {
             try{
                 let res = await goods();
                 this.goodsList = res.data;
+                this.$nextTick(()=>{
+                    this.initBsScroll();
+                    this.initHeightRange();
+                })
             }catch(e){
                  console.log(e);
             }
+        },
+        initTempScroll(elem){
+            let domS = this.$refs[elem];
+            let bs = new this.bScroll(domS,{
+                click: true,
+                probeType: 3 //当 probeType 为 3 的时候，
+                //不仅在屏幕滑动的过程中，而且在 momentum 滚动动画运行过程中实时派发 scroll 事件，
+                //监听滚动的实时坐标
+            });
+            return bs;
+        },
+        // 根据滚动的高度计算  判断是否在高度区间内。
+        computActiveIndex(y){
+            let heights = this.goodHeights;
+            for(let i=0; i< heights; i++){
+                let current = heights[i];
+                let next = heights[i+1];
+                if(next || (y >=current && y < next)){
+                    this.activeIndex = i;
+                }
+                this.activeIndex = 0;
+            }
+        },
+        initBsScroll(){
+            this.mSroll = this.initTempScroll('b1');
+            this.lSroll = this.initTempScroll('b2');
+            this.initScollEvent(this.lSroll,'scroll',(pos)=>{
+                let y = Math.abs(Math.round(pos.y));
+                this.computActiveIndex(y);
+            });
+        },
+        initScollEvent(bscroll,event,fun){
+            bscroll.on(event,(pos)=>{
+                fun(pos);
+            })
+        },
+        // 数据生成以后，计算出每一个块区间
+        initHeightRange(){
+            let height = 0;
+            let hooks = document.querySelectorAll('li-hook');
+            hooks.forEach( item => {
+                this.goodHeights.push(height);
+                height = height + item.offsetHeight;
+            })
         }
     },
     mounted(){
@@ -73,8 +126,22 @@ export default {
 @import "../../common/less/mixin.less";
 .goods{
     display: flex;
+    height: calc(100vh - 348px - 94px);
+    .activeIndex{
+        background: #fff !important;
+        position: relative;
+        z-index: 2;
+        span::after{
+             border: none !important;
+        }
+    }
+    .menu-list-wrap{
+        height: 100%;
+        overflow: hidden;
+    }
     .menu-list{
         width: 161px;
+
         .menu-item{
             height: 108px;
             width: 100%;
@@ -104,6 +171,7 @@ export default {
     .goods-wrap{
         flex: 1;
         margin-left: -1px; 
+        overflow: hidden;
         .food-title{
             height: 52px;
             background-color: #f3f5f7;
