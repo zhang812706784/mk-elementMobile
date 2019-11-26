@@ -3,7 +3,7 @@
         <div class="menu-list-wrap" ref="b1">
             <ul class="menu-list">
                 <li class="menu-item fontSize12"  :class="{'activeIndex': activeIndex == index}"
-                    v-for="(item,index) in goodsList" :key="index">
+                    v-for="(item,index) in goodsList" :key="index" @click="changeActive(index)">
                 
                     <span class="middle border-1px"><i class="menu-icon" v-if="item.type > -1" :class="[iconTyps[item.type]]"></i>{{item.name}}</span>
                 </li>
@@ -72,6 +72,11 @@ export default {
                  console.log(e);
             }
         },
+        changeActive(index){
+            this.activeIndex = index;
+            let elem = document.querySelectorAll('.li-hook')[index];
+            this.lSroll.scrollToElement(elem,300);
+        },
         initTempScroll(elem){
             let domS = this.$refs[elem];
             let bs = new this.bScroll(domS,{
@@ -85,15 +90,17 @@ export default {
         // 根据滚动的高度计算  判断是否在高度区间内。
         computActiveIndex(y){
             let heights = this.goodHeights;
-            for(let i=0; i< heights; i++){
+            for(let i=0; i < heights.length; i++){
                 let current = heights[i];
                 let next = heights[i+1];
-                if(next || (y >=current && y < next)){
+                if(!next || (y >= current && y < next)){
                     this.activeIndex = i;
+                    break;
                 }
-                this.activeIndex = 0;
             }
+            
         },
+        // 实时监测滚动高度的变化
         initBsScroll(){
             this.mSroll = this.initTempScroll('b1');
             this.lSroll = this.initTempScroll('b2');
@@ -102,6 +109,7 @@ export default {
                 this.computActiveIndex(y);
             });
         },
+        // bscroll绑定事件
         initScollEvent(bscroll,event,fun){
             bscroll.on(event,(pos)=>{
                 fun(pos);
@@ -110,7 +118,7 @@ export default {
         // 数据生成以后，计算出每一个块区间
         initHeightRange(){
             let height = 0;
-            let hooks = document.querySelectorAll('li-hook');
+            let hooks = document.querySelectorAll('.li-hook');
             hooks.forEach( item => {
                 this.goodHeights.push(height);
                 height = height + item.offsetHeight;
@@ -131,6 +139,7 @@ export default {
         background: #fff !important;
         position: relative;
         z-index: 2;
+        margin-top: -1px;
         span::after{
              border: none !important;
         }
