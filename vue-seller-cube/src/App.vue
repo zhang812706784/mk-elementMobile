@@ -31,9 +31,12 @@ export default {
     this.sellerFun();
   },
   methods:{
-    async sellerFun(){
-      let res = await seller();
-      this.sellerObj  = res.data;
+    // async sellerFun(){
+    //   let res = await seller();
+    //   this.sellerObj  = res.data;
+    // }
+    sellerFun(){
+      this.sellerObj= this.tdata.seller;
     }
   }
 }

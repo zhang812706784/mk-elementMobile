@@ -5,9 +5,13 @@ import App from './App.vue'
 
 import "./common/css/reset.css";
 import "./common/less/index.less";
-import BScroll from 'better-scroll'
+// better-scroll官网地址：https://ustbhuangyi.github.io/better-scroll/#/examples/vertical-scroll
+import BScroll from 'better-scroll';
+Vue.prototype.bScroll = BScroll;
 
-Vue.prototype.bScroll = BScroll
+import data from '@/data.js';
+Vue.prototype.tdata = data;
+
 Vue.config.productionTip = false
 
 

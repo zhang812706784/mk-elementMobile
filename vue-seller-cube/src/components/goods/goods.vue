@@ -48,6 +48,7 @@
 </template>
 <script>
 import {goods} from '@/api/app';
+
 export default {
     data(){
         return{
@@ -60,7 +61,7 @@ export default {
         }
     },
     methods:{
-        async getGoods(){
+        /* async getGoods(){
             try{
                 let res = await goods();
                 this.goodsList = res.data;
@@ -71,7 +72,13 @@ export default {
             }catch(e){
                  console.log(e);
             }
+        }, */
+        getGoods(){
+            this.goodsList = this.tdata.goods;
+            this.initBsScroll();
+            this.initHeightRange();
         },
+        
         changeActive(index){
             this.activeIndex = index;
             let elem = document.querySelectorAll('.li-hook')[index];

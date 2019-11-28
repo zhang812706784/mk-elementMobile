@@ -58,7 +58,7 @@ export default {
     height: 100vh;
     width: 100vw;
     background: rgba(7, 17, 27, 0.8);
-    z-index: 2;
+    z-index: 5;
     overflow-y: auto;
     color: #fff; 
     .detail-wrap{
